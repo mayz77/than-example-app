@@ -10,17 +10,23 @@ use App\Scopes\StatusNormalScope;
 class UserLocation extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $table = "user_locations";
 
 /*    protected static function booted(){
         static::addGlobalScope(new StatusNormalScope);
     }*/
 
-    // public function produce_locations(){
-    //     return $this->hasMany(ProduceLocation::class,);
-    // }
+     public function produce_locations(){
+         return $this->hasMany(ProduceLocation::class,);
+     }
 
     public function produce_posts(){
-        return $this->belongsToMany(ProducePost::class, 'produce_locations', 'user_location_id', 'produce_post_id');
+        return $this->belongsToMany(
+            ProducePost::class,
+            'produce_locations',
+            'user_location_id',
+            'produce_post_id'
+        );
     }
 
     // user_locations

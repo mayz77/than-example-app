@@ -12,6 +12,8 @@ use App\Helpers\Statushelper;
 class ProducePost extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $table = "produce_posts";
+    protected $primaryKey = "id";
 
     protected static function booted(){
         static::addGlobalScope(new StatusNormalScope);
@@ -21,9 +23,9 @@ class ProducePost extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function user_locations(){
-    //     return $this->belongsToMany(UserLocation::class);
-    // }
+     public function user_locations(){
+         return $this->belongsToMany(UserLocation::class);
+     }
 
     public function getIsStatusAttribute(){
         if($this->status){

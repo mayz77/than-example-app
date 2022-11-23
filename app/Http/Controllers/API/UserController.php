@@ -52,15 +52,15 @@ class UserController extends Controller
         ];
     }
 
-    public function get_location(Request $request, $user_location_id=0){
+    public function get_location(Request $request, $user_location_id=1){
         // mock user id
         $user_id = 1;
 
         // $user_id = $request->user()->id;
         $user_location = UserLocation::select(
             'id','name_th','name_en','lat','long','province','district','sub_district')
-            ->where('user_id',$user_id)
             ->with('produce_posts')
+            ->where('user_id',$user_id)
             ->findOrFail($user_location_id);
 
         return response()->json($user_location);
